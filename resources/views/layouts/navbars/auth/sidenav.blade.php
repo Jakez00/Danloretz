@@ -34,12 +34,23 @@
                 </a>
             </li>
             @if (session('role') == 1)
+            <li class="nav-item mt-3 d-flex align-items-center">
+                <h4 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6 mb-0">SUPER ADMIN</h4>
+            </li>
             <li class="nav-item">
                 <a class="nav-link {{ str_contains(request()->url(), 'user-management') == true ? 'active' : '' }}" href="user-management">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-users text-dark text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">USER MANAGEMENT</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ str_contains(request()->url(), 'storebranch') == true ? 'active' : '' }}" href="storebranch">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-code-branch text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">STORE BRANCH</span>
                 </a>
             </li>
             @endif
