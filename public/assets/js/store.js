@@ -6,13 +6,13 @@ $.ajaxSetup({
 
 
 
-$('#adduser').on('click','#adduser', function(){
+$('#addstore').on('click','#addstore', function(){
     
     $.ajax({
         type: 'POST',
-        url: 'user-management/add',
+        url: 'storebranch/add',
         cache: false,
-        data: $('#formadduser').serialize(),
+        data: $('#formaddstore').serialize(),
         dataType:'json',
         success: function(response){
             if(response.Error == 1){
@@ -24,33 +24,29 @@ $('#adduser').on('click','#adduser', function(){
               }
               else if(response.Error == 0){
                 $("#name").val("");
-                $("#email").val("");
-                $("#pass1").val("");
-                $("#pass2").val("");
-                $("#role").val("");
-                $("#store").val("");
-
+                $("#description").val("");
+                $("#location").val("");
                 Swal.fire(
                   'Saved!',
                    response.message,
                   'success'
                 )
-                $("#adduser").on("hidden.bs.modal", function(e){
+                $("#addstore").on("hidden.bs.modal", function(e){
                   window.location.reload();
                  })
               }
         }
     });
+
 })
 
-$('#edituser').on('click','#edituser', function(){
-
-  var name = $(this).closest('tr').find('#name').val()
+$('#editstore').on('click','#editstore', function(){
+    
     $.ajax({
         type: 'POST',
-        url: 'user-management/edit',
+        url: 'storebranch/edit',
         cache: false,
-        data: $('#formedituser').serialize(),
+        data: $('#formeditstore').serialize(),
         dataType:'json',
         success: function(response){
             if(response.Error == 1){
@@ -66,7 +62,7 @@ $('#edituser').on('click','#edituser', function(){
                    response.message,
                   'success'
                 )
-                $("#edituser").on("hidden.bs.modal", function(e){
+                $("#editstore").on("hidden.bs.modal", function(e){
                   window.location.reload();
                  })
               }
@@ -77,36 +73,23 @@ $('#edituser').on('click','#edituser', function(){
 
 $(document).on('click','#edit', function(){
     var id = $(this).closest('tr').find('#id').val()
-    
+
     $.ajax({
-        url: 'user-management/detail',
+        url: 'storebranch/detail',
         method: 'GET',
         data: { id:id},
         success: function(response) {
-            $('#formedituser').find('input[name="id"]').val(response.eid)
-            $('#formedituser').find('input[name="efirstname"]').val(response.firstname)
-            $('#formedituser').find('input[name="elastname"]').val(response.lastname)
-            $('#formedituser').find('input[name="eemail"]').val(response.email)
-            $('#formedituser').find('select[name="erole"]').val(response.role)
-            $('#formedituser').find('select[name="estore"]').val(response.store)
-            
-            var eroleSelect = document.querySelector('#erole');
-            var estoreSelect = document.querySelector('#estore');
-            if (eroleSelect.value == '1') {
-              estoreSelect.disabled = true;
-              estoreSelect.value = "";
-            } else {
-                estoreSelect.disabled = false;
-            }
+            $('#formeditstore').find('input[name="id"]').val(id)
+            $('#formeditstore').find('input[name="ename"]').val(response.name)
+            $('#formeditstore').find('textarea[name="edescription"]').val(response.description)
+            $('#formeditstore').find('input[name="elocation"]').val(response.location)
         }
     });
-    
 
 })
 
 
 $(document).on('click','#delete', function(){
-
   var id = $(this).closest('tr').find('#id').val()
   var name = $(this).closest('tr').find('#name').val()
 
@@ -122,14 +105,14 @@ $(document).on('click','#delete', function(){
         if (result.isConfirmed) {
             $.ajax({
                 type: 'POST',
-                url: 'user-management/delete',
+                url: 'storebranch/delete',
                 cache: false,
                 data: {id:id, name:name},
                 dataType:'json',
                 success: function(){
                     Swal.fire({
                         title: 'Deleted!',
-                        text: "User has been deleted",
+                        text: "Store has been deleted",
                         icon: 'success',
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'Ok'
@@ -142,31 +125,3 @@ $(document).on('click','#delete', function(){
         }
       })
 })
-
-
-
-
-var roleSelect = document.querySelector('#role');
-var storeSelect = document.querySelector('#store');
-var eroleSelect = document.querySelector('#erole');
-var estoreSelect = document.querySelector('#estore');
-
-roleSelect.addEventListener('change', function() {
-  
-  if (this.value === '1') {
-      storeSelect.disabled = true;
-      storeSelect.value = "";
-  } else {
-      storeSelect.disabled = false;
-  }
-});
-
-eroleSelect.addEventListener('change', function() {
-
-  if (this.value === '1') {
-      estoreSelect.disabled = true;
-      estoreSelect.value = "";
-  } else {
-      estoreSelect.disabled = false;
-  }
-});

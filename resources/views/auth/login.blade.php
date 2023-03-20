@@ -20,7 +20,7 @@
                                     <p class="mb-0">Enter your email and password to sign in</p>
                                 </div>
                                 <div class="card-body">
-                                    <form role="form" method="POST" action="{{ route('login.perform') }}">
+                                    <form role="form" method="POST" action="login">
                                         @csrf
                                         @method('post')
                                         <div class="flex flex-col mb-3">
@@ -40,7 +40,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                                {{-- <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                     <p class="mb-1 text-sm mx-auto">
                                         Forgot you password? Reset your password
                                         <a href="{{ route('reset-password') }}" class="text-primary text-gradient font-weight-bold">here</a>
@@ -51,7 +51,7 @@
                                         Don't have an account?
                                         <a href="{{ route('register') }}" class="text-primary text-gradient font-weight-bold">Sign up</a>
                                     </p>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div

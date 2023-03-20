@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Password;
 use App\Models\User;
 
 class LoginController extends Controller
@@ -36,6 +34,7 @@ class LoginController extends Controller
                 'name' => $users->firstname.' '.$users->lastname,
                 'email' => $users->email,
                 'role' => $users->role,
+                'store' => $users->store,
             ]);
 
             return redirect()->intended('dashboard');
