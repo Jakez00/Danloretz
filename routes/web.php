@@ -11,11 +11,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
-
-Route::get('/dashboard', function () {
-    return view('welcome');
-});           
+*/         
             
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
@@ -31,11 +27,9 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', 'DashboardController@index');
 });
 
-
 Route::prefix('profile')->middleware('auth')->group(function () {
     Route::get('/', 'ProfileController@index');
 });
-
 
 Route::prefix('user-management')->middleware('auth')->group(function () {
     Route::get('/', 'UsermanagementController@index');
@@ -53,7 +47,20 @@ Route::prefix('storebranch')->middleware('auth')->group(function () {
     Route::get('/detail', 'StorebranchController@detail');
 });
 
+Route::prefix('itemcatergory')->middleware('auth')->group(function () {
+    Route::get('/', 'ItemtypeController@index');
+    Route::post('/add', 'ItemtypeController@add');
+    Route::post('/delete', 'ItemtypeController@delete');
+    Route::post('/edit', 'ItemtypeController@edit');
+    Route::get('/detail', 'ItemtypeController@detail');
+});
 
 Route::prefix('items')->middleware('auth')->group(function () {
-    Route::get('/', 'ItemsController@index');
+    Route::get('/', 'ItemController@index');
+    Route::POST('/', 'ItemController@index');
+    Route::post('/add', 'ItemController@add');
+    Route::post('/delete', 'ItemController@delete');
+    Route::post('/edit', 'ItemController@edit');
+    Route::post('/addstock', 'ItemController@addstock');
+    Route::get('/detail', 'ItemController@detail');
 });

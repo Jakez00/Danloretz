@@ -16,7 +16,7 @@ $aes = new AESCipher;
                 <div class="card-header pb-0 ">
                     <h6>Users</h6>
                 </div>
-                <button type="button" class="btn btn-primary m-3 text-nowrap col-lg-1 col-md-2 col-sm-2 bg-danger" data-bs-toggle="modal" data-bs-target="#adduser"><i class="fas fa-plus-circle"></i> Add User</button>
+                <button type="button" class="btn btn-primary m-3 text-nowrap col-lg-1 col-md-2 col-sm-2 bg-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#adduser"><i class="fas fa-plus-circle"></i> &nbsp;&nbsp;USER</button>
 
                 <div class="modal fade" id="adduser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">

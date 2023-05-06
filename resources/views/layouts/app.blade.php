@@ -19,62 +19,55 @@
     <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="assets/css/argon-dashboard.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
-<body class=" {{ $class ?? '' }}">
+<body id="body" class=" {{ $class ?? '' }}">
     @guest
         @yield('content')
     @endguest
 
     @auth
-        @if (in_array(request()->route()->getName(), ['sign-in-static', 'sign-up-static', 'login', 'register', 'recover-password', 'rtl', 'virtual-reality']))
-            @yield('content')
-        @else
-            @if (!in_array(request()->route()->getName(), ['profile', 'profile-static']))
-                <div class="min-height-300 position-absolute w-100" style="background: rgb(253,255,38);
-                background: linear-gradient(90deg, rgba(253,255,38,1) -18%, rgba(203,65,0,1) 99%);">
-                    <h1 class="text-center" 
-                    style="margin-top: 20px;
-                           font-weight:bolder;
-                           text-shadow: 3px 1px  #000000;
-                           color: darkred;
-                           font-family: Times New Roman, Times, serif;
-                           word-spacing:20px;
-                           letter-spacing:15px">
-                    DAN - LORET'Z Co.</h1>
-                    <h3 class=" text-center" 
-                    style="margin-top: 50px;
-                           text-shadow: 3px 1px #000000;
-                           font-family: sans-serif;
-                           color: darkred;
-                           letter-spacing:2px">
-                    Mr. Loreto Lastra Octobre</h3>
-                    <h6 class=" text-center" 
-                    style="margin-top: 2px;
-                           font-family: sans-serif;
-                           color: rgb(0, 0, 0);
-                           letter-spacing:5px">
-                    Proprietor</h6>
+            <div class="min-height-300 position-absolute w-100" style="background: rgb(253,255,38);
+            background: linear-gradient(90deg, rgba(253,255,38,1) -18%, rgba(203,65,0,1) 99%);">
+                <h1 class="text-center" 
+                style="margin-top: 20px;
+                        font-weight:bolder;
+                        text-shadow: 3px 1px  #000000;
+                        color: darkred;
+                        font-family: Times New Roman, Times, serif;
+                        word-spacing:20px;
+                        letter-spacing:15px">
+                DAN - LORET'Z Co.</h1>
+                <h3 class=" text-center" 
+                style="margin-top: 50px;
+                        text-shadow: 3px 1px #000000;
+                        font-family: sans-serif;
+                        color: darkred;
+                        letter-spacing:2px">
+                Mr. Loreto Lastra Octobre</h3>
+                <h6 class=" text-center" 
+                style="margin-top: 2px;
+                        font-family: sans-serif;
+                        color: rgb(0, 0, 0);
+                        letter-spacing:5px">
+                Proprietor</h6>
 
-                </div>
-            @elseif (in_array(request()->route()->getName(), ['profile-static', 'profile']))
-                <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg'); background-position-y: 50%;">
-                    <span class="mask bg-primary opacity-6"></span>
-                </div>
-            @endif
+            </div>
+            {{-- <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg'); background-position-y: 50%;">
+                <span class="mask bg-primary opacity-6"></span>
+            </div> --}}
             @include('layouts.navbars.auth.sidenav')
                 <main class="main-content border-radius-lg">
                     @yield('content')
                 </main>
             {{-- @include('components.fixed-plugin') --}}
-        @endif
     @endauth
 
     <!--   Core JS Files   -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></scrip>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
     <script src="assets/js/core/popper.min.js"></script>
     <script src="assets/js/core/bootstrap.min.js"></script>
     <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>

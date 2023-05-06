@@ -28,14 +28,20 @@ class LoginController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
 
-            $users = User::where('email',$request->email)->first();
+            $users = User::leftjoin('storebranch','storebranch.id','=','users.store')
+                            ->where('users.email',$request->email)
+                            ->select('users.*','storebranch.storename')
+                            ->first();
+
             session([
                 'user_id' => $users->id,
                 'name' => $users->firstname.' '.$users->lastname,
                 'email' => $users->email,
                 'role' => $users->role,
                 'store' => $users->store,
+                'storename' => $users->storename,
             ]);
+            // dd(session('name'));
 
             return redirect()->intended('dashboard');
         }

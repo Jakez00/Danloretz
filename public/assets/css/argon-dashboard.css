@@ -21099,11 +21099,13 @@ hr.horizontal.gray-light {
   padding-right: 1rem;
   font-weight: 500;
   color: #67748e;
+  
 }
 .navbar-vertical .navbar-nav .nav-link > i {
   min-width: 1.8rem;
   font-size: 0.9375rem;
   line-height: 1.5rem;
+  
 }
 .navbar-vertical .navbar-nav .nav-link .dropdown-menu {
   border: none;
@@ -21143,8 +21145,9 @@ hr.horizontal.gray-light {
 }
 .navbar-vertical.navbar-expand-xs .navbar-collapse {
   display: block;
+  /* border: 1px solid black; */
   overflow: auto;
-  height: calc(100vh - 360px);
+  /* height: calc(100vh - 360px); */
 }
 .navbar-vertical.navbar-expand-xs > [class*=container] {
   flex-direction: column;
@@ -22762,7 +22765,7 @@ hr.horizontal.gray-light {
 }
 
 .table thead th {
-  padding: 0.75rem 1.5rem;
+  /* padding: 0.75rem 1.5rem; */
   text-transform: capitalize;
   letter-spacing: 0px;
   border-bottom: 1px solid #e9ecef;

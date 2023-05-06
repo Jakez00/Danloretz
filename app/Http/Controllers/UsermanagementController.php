@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Itemtype;
 use App\Models\Storebranch;
 use App\Http\Controllers\AESCipher;
 use App\Http\Controllers\LogsController;
@@ -28,9 +29,10 @@ class UsermanagementController extends Controller
                         ->get();
 
         $stores = Storebranch::all();
+        $itemtype = Itemtype::where('store',session('store'))->get();
 
 
-        return view('pages.user-management',compact('users','stores'));
+        return view('pages.user-management',compact('users','stores','itemtype'));
     }
 
     public function add(Request $request)

@@ -2,6 +2,8 @@
 
 <?php
 use Carbon\Carbon;
+use App\Http\Controllers\AESCipher;
+$aes = new AESCipher;
 ?>
 
 @section('title','DanLoretz - Store Braches')
@@ -14,7 +16,7 @@ use Carbon\Carbon;
                 <div class="card-header pb-0 ">
                     <h6>Users</h6>
                 </div>
-                <button type="button" class="btn btn-primary m-3 text-nowrap col-lg-1 col-md-2 col-sm-2 bg-danger" data-bs-toggle="modal" data-bs-target="#addstore"><i class="fas fa-plus-circle"></i> Add Store</button>
+                <button type="button" class="btn btn-primary m-3 text-nowrap col-lg-1 col-md-2 col-sm-2 bg-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#addstore"><i class="fas fa-plus-circle"></i> &nbsp;&nbsp;STORE</button>
 
                 <div class="modal fade" id="addstore" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -55,7 +57,7 @@ use Carbon\Carbon;
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form id="formeditstore" action="storebranch/add" method="POST">
+                            <form id="formeditstore" action="storebranch/edit" method="POST">
                                 @csrf
                                 <input type="hidden" id="id" name="id">
                                 <div class="mb-3">
@@ -97,8 +99,8 @@ use Carbon\Carbon;
                             <tbody>
                                 @foreach ($stores as $store)
                                 <tr>
-                                    <input type="hidden" id="id" value="{{ $store->id }}">
-                                    <input type="hidden" id="name" value="{{ $store->storename }}">
+                                    <input type="hidden" id="id" value="{{ $aes->encrypt($store->id) }}">
+
 
                                    <td><p class="mx-3 text-sm font-weight-bold mb-0">{{ $loop->iteration }}</p></td>
                                    <td><p class="mx-3 text-sm font-weight-bold mb-0">{{ $store->storename }}</p></td>
@@ -119,7 +121,6 @@ use Carbon\Carbon;
             </div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="assets/js/store.js"></script>
 @endsection
 

@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Storebranch;
+use App\Models\Itemtype;
 use App\Http\Controllers\LogsController;
 
 class StorebranchController extends Controller
 {   
+    protected $aes;
     protected $logs;
     public function __construct(){
+        $this->aes = new AESCipher;
         $this->logs = new LogsController;
     }
 
@@ -19,9 +22,9 @@ class StorebranchController extends Controller
         $stores = Storebranch::leftjoin('users','storebranch.created_by','=','users.id')
                     ->select('storebranch.*','users.username')
                     ->orderBy('storebranch.storename', 'ASC')->get();
+        $itemtype = Itemtype::where('store',session('store'))->get();
 
-
-        return view('pages.storebranch',compact('stores'));
+        return view('pages.storebranch',compact('stores','itemtype'));
     }
 
     public function add(Request $request)
@@ -64,7 +67,7 @@ class StorebranchController extends Controller
     }
 
     public function delete(Request $request){
-        $id = $request->id;
+        $id = $this->aes->decrypt($request->id);
         $name = $request->name;
 
         $delete = Storebranch::where('id',$id)->delete();
@@ -81,7 +84,7 @@ class StorebranchController extends Controller
 
     public function edit(Request $request){
         
-        $id = $request->id;
+        $id = $this->aes->decrypt($request->id);
         $ename = $request->ename;
         $edescription = $request->edescription;
         $elocation = $request->elocation;
@@ -120,7 +123,7 @@ class StorebranchController extends Controller
 
 
     public function detail(Request $request){
-        $id = $request->id;
+        $id = $this->aes->decrypt($request->id);
 
         $details = Storebranch::where('id','=',$id)->first();
         return response()->json([
